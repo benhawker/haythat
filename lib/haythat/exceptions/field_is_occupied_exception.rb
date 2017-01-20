@@ -1,0 +1,1 @@
+class FieldIsOccupiedException < RuntimeError;end

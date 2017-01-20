@@ -1,0 +1,11 @@
+- field
+  + crop: carrot, wheat, corn, tomato, potato
+  + can grow only one crop at a time
+
+- a user has
+  + a number of fields
+  + a silo to store the harvest product
+
+- a crop
+  + harvest time and basic, maximum value
+  + will duplicate the number of crops
