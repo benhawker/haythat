@@ -11,7 +11,6 @@
 #   # 2 minutes later
 #   field.harvest? => true
 #   field.harvest => HarvestItem(harvest_crop: wheat, quantity: 2)
-#
 
 class FieldIsOccupiedException < RuntimeError;end
 
@@ -30,8 +29,10 @@ class Field
   end
 
   def harvest(current_time = Time.now)
-    if growing_crop && occupied_at + growing_crop.harvest_time <= current_time
-      HarvestItem.new(growing_crop)
-    end
+    HarvestItem.new(growing_crop) if harvestable?(current_time)
+  end
+
+  def harvestable?(current_time)
+    growing_crop && occupied_at + growing_crop.harvest_time <= current_time
   end
 end

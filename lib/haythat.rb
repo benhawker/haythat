@@ -1,6 +1,8 @@
 $LOAD_PATH << File.expand_path("./")
 
 require "haythat/field"
+require "haythat/farm_activity"
+
 require "haythat/crops/base_crop"
 require "haythat/crops/wheat"
 
