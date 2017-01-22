@@ -4,7 +4,6 @@ class BaseCrop
   end
 
   HARVEST_TIME = minute(2)
-  BASE_VALUE = 10
   MAX_VALUE = 10
 
   # examine if can harvest crop
