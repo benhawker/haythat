@@ -1,19 +1,3 @@
-# Examples
-#
-#   wheat = Wheat.new
-#
-#   field = Field.new
-#   field.grow(wheat)
-#   field.harvest? => false
-#
-#   field.grow(wheat) => raise FieldIsOccupied
-#
-#   # 2 minutes later
-#   field.harvest? => true
-#   field.harvest => HarvestItem(harvest_crop: wheat, quantity: 2)
-
-class FieldIsOccupiedException < RuntimeError;end
-
 class Field
   attr_reader :growing_crop, :occupied_at
 
