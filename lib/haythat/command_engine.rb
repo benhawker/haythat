@@ -6,16 +6,14 @@ class CommandEngine
     "gcrop" => Command::GrowCrop
   }.freeze
 
-  attr_reader :commands
-
   def initialize(options = {})
+    @farm_activity = options[:farm_activity]
   end
 
   # Handler of command
   #
   # Validate if command is valid
   # Put command to command stack
-  # Execute command
   def receive(command)
     _command = command.split(COMMAND_SEPERATOR)
     command_name = _command[0]
@@ -24,6 +22,11 @@ class CommandEngine
     if COMMANDS.key?(command_name)
       commands.push(command_name, args)
     end
+  end
+
+  def execute
+    first_command = commands.take_first
+    command_name, args = first_command
   end
 
   def commands
@@ -45,9 +48,11 @@ class CommandEngine
     end
 
     def take(num = 1)
-      took_commands = @data[@current_point...@current_point+num]
-      @current_point += num
-      took_commands
+      @data.shift(num)
+    end
+
+    def take_first
+      take(1).first
     end
   end
 end
