@@ -1,4 +1,12 @@
 class BaseCrop
+  def self.inherited(child_class)
+    children_class << child_class
+  end
+
+  def self.children_class
+    @@children_class ||= []
+  end
+
   def self.minute(value)
     value * 60
   end
