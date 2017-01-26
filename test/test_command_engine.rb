@@ -38,5 +38,4 @@ class TestCommandQueue < Minitest::Test
     @command_queue.push(Command::GrowCrop.new(["2", "wheat"]))
     assert_equal(1, @command_queue.take(1).size)
   end
-
 end

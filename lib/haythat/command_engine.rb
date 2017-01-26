@@ -27,7 +27,7 @@ class CommandEngine
   end
 
   def execute
-    first_command = commands.take_first
+    commands.take_first.(@farm_activity)
   end
 
   def commands
