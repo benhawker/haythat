@@ -29,25 +29,14 @@ class TestCommandQueue < Minitest::Test
   end
 
   def test_push_command
-    @command_queue.push("grow_crop", ["1", "wheat"])
+    @command_queue.push(Command::GrowCrop.new(["1", "corn"]))
     assert_equal(1, @command_queue.size)
   end
 
   def test_take_1_command
-    @command_queue.push("grow_crop", ["1", "corn"])
-    @command_queue.push("grow_crop", ["2", "indigo"])
+    @command_queue.push(Command::GrowCrop.new(["1", "corn"]))
+    @command_queue.push(Command::GrowCrop.new(["2", "wheat"]))
     assert_equal(1, @command_queue.take(1).size)
   end
 
-  def test_take_2_command
-    @command_queue.push("grow_crop", ["1", "corn"])
-    @command_queue.push("grow_crop", ["2", "indigo"])
-    assert_equal(2, @command_queue.take(2).size)
-  end
-
-  def test_take_10_command
-    @command_queue.push("grow_crop", ["1", "corn"])
-    @command_queue.push("grow_crop", ["2", "indigo"])
-    assert_equal(2, @command_queue.take(10).size)
-  end
 end

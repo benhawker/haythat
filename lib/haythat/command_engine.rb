@@ -15,18 +15,19 @@ class CommandEngine
   # Validate if command is valid
   # Put command to command stack
   def receive(command)
-    _command = command.split(COMMAND_SEPERATOR)
-    command_name = _command[0]
-    args = _command[1..-1]
+    command_name, *args = command.split(COMMAND_SEPERATOR)
 
     if COMMANDS.key?(command_name)
-      commands.push(command_name, args)
+      commands.push(build_command(command_name, args))
     end
+  end
+
+  def build_command(command_name, command_arr)
+    COMMANDS[command_name].new(command_arr)
   end
 
   def execute
     first_command = commands.take_first
-    command_name, args = first_command
   end
 
   def commands
@@ -39,8 +40,8 @@ class CommandEngine
       @current_point = 0
     end
 
-    def push(command_name, args)
-      @data << { command_name => args }
+    def push(command)
+      @data << command
     end
 
     def size
