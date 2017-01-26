@@ -8,7 +8,5 @@ class TestCommandGrowCrop < Minitest::Test
 
     command = Command::GrowCrop.new(["1", "wheat"])
     command.call(farm_activity)
-
-    #puts fields.first.growing_crop
   end
 end
