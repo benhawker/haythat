@@ -42,7 +42,7 @@ class GameSimulation
   end
 
   def rand_crop
-    [ Carrot, Corn, ChiliPeper, Indigo, Pumpkin, Soybean, Sugarcane, Wheat ].sample(1).first.new
+    BaseCrop.children_class.sample(1).first.new
   end
 
   def update
