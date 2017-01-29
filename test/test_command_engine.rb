@@ -20,6 +20,7 @@ class TestCommandEngine < Minitest::Test
     engine.receive("grow_crop 1 corn")
 
     engine.execute
+    assert_equal(true, fields[0].growing_crop !=nil )
   end
 end
 

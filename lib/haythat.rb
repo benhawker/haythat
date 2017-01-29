@@ -18,7 +18,6 @@ autoload "/haythat/crops"
 autoload "/haythat/commands"
 require "haythat/command_engine"
 
-
 require "haythat/harvest_item"
 
 require "haythat/exceptions/field_is_occupied_exception"
