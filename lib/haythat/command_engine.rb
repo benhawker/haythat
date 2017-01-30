@@ -1,10 +1,14 @@
 class CommandEngine
   COMMAND_SEPERATOR = " ".freeze
 
-  COMMANDS = {
+  FARM_ACTIVITY_COMMANDS = {
     "grow_crop" => Command::GrowCrop,
     "gcrop" => Command::GrowCrop
   }.freeze
+
+  UTILITY_COMMANDS = {
+    "display" => Command::Display
+  }
 
   def initialize(options = {})
     @farm_activity = options[:farm_activity]
@@ -14,46 +18,34 @@ class CommandEngine
   #
   # Validate if command is valid
   # Put command to command stack
-  def receive(command)
+  def listen
+    command = gets
+
     command_name, *args = command.split(COMMAND_SEPERATOR)
 
-    if COMMANDS.key?(command_name)
-      commands.push(build_command(command_name, args))
+    if FARM_ACTIVITY_COMMANDS.key?(command_name)
+      command_object = build_farm_command(command_name, args)
+    elsif UTILITY_COMMANDS.key?(command_name)
+      command_object = build_utility_command(command_name, args)
     end
+
+    commands.push command_object
   end
 
-  def build_command(command_name, command_arr)
-    COMMANDS[command_name].new(command_arr)
+  def build_utility_command(command_name, command_args)
+    UTILITY_COMMANDS[command_name].new(command_args, farm_activity: @farm_activity)
   end
 
-  def execute
-    commands.take_first.(@farm_activity)
+  def build_farm_command(command_name, command_args)
+    FARM_ACTIVITY_COMMANDS[command_name].new(command_args, farm_activity: @farm_activity)
+  end
+
+  def execute(args = {})
+    _poped_command = commands.pop
+    _poped_command.call if _poped_command
   end
 
   def commands
     @_command_queue ||= CommandQueue.new
-  end
-
-  class CommandQueue
-    def initialize
-      @data = []
-      @current_point = 0
-    end
-
-    def push(command)
-      @data << command
-    end
-
-    def size
-      @data.size
-    end
-
-    def take(num = 1)
-      @data.shift(num)
-    end
-
-    def take_first
-      take(1).first
-    end
   end
 end

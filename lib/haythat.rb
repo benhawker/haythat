@@ -1,4 +1,4 @@
-$LOAD_PATH << File.expand_path("./")
+$LOAD_PATH << File.expand_path("./lib")
 
 def autoload(path)
   if path[-1] != "/"
@@ -17,6 +17,7 @@ autoload "/haythat/crops"
 # require command
 autoload "/haythat/commands"
 require "haythat/command_engine"
+require "haythat/command_queue"
 
 require "haythat/harvest_item"
 

@@ -1,10 +1,11 @@
 module Command
   class GrowCrop
-    def initialize(args = [])
+    def initialize(args = [], options = {})
       @args = args
+      @farm_activity = options[:farm_activity]
     end
 
-    def call(farm_activity)
+    def call
       field_index = @args[0].to_i
       crop_string = @args[1]
 
@@ -26,5 +27,9 @@ module Command
         hash
       end
     end
+
+    private
+
+    attr_reader :farm_activity
   end
 end
